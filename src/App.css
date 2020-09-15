@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.CC {
+  display: flex;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -32,7 +39,20 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.greeting {
+  border: 3px solid black;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.randomNums {
+  border: 3px solid black;
+  padding: 5px;
+  margin-bottom: 5px;
 }
