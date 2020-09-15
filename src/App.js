@@ -21,8 +21,13 @@ function App() {
       />
       <Greetings lang="de">Ludwig</Greetings>
       <Greetings lang="fr">François</Greetings>
-      <Random min={1} max={6}/>
-      <Random min={80} max={100}/>
+      <Random min={1} max={6} />
+      <Random min={80} max={100} />
+      <BoxColor
+        r={Math.floor(Math.random() * 255)}
+        g={Math.floor(Math.random() * 255)}
+        b={Math.floor(Math.random() * 255)}
+      />
     </div>
   );
 }
@@ -49,12 +54,25 @@ function Greetings(props) {
   }
 }
 
-function Random(props){
-  return(
+function Random(props) {
+  return (
     <div className="randomNums">
-  <h3>Random value between {props.min} and {props.max} is {Math.floor(Math.random()*(props.max-props.min)+props.min)}</h3>
-    </div> 
-)
+      <h3>
+        Random value between {props.min} and {props.max} is{' '}
+        {Math.floor(Math.random() * (props.max - props.min) + props.min)}
+      </h3>
+    </div>
+  );
+}
+
+function BoxColor({ r, g, b }) {
+  return (
+    <div style={{ backgroundColor: `rgb(${r},${g},${b})` }}>
+      <h3>
+        RGB:({r},{g},{b})
+      </h3>
+    </div>
+  );
 }
 
 export default App;
