@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import Facebook from './Components/Facebook';
 
 function App() {
   return (
@@ -90,7 +91,7 @@ function App() {
       />
 
       <Dice />
-      <br></br>
+      {/* <br></br>
       <Carousel
         imgs={[
           'https://randomuser.me/api/portraits/women/1.jpg',
@@ -98,8 +99,9 @@ function App() {
           'https://randomuser.me/api/portraits/women/2.jpg',
           'https://randomuser.me/api/portraits/men/2.jpg',
         ]}
-      />
+      /> */}
       <NumbersTable limit={12} />
+      <Facebook />
     </div>
   );
 }
