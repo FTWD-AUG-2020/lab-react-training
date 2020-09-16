@@ -13,6 +13,7 @@ const Facebook = () => {
         <li>First name: {eachProf.firstName}</li>
         <li>Last name: {eachProf.lastName}</li>
         <li>Country: {eachProf.country}</li>
+        <li>Type: {eachProf.isStudent}</li>
       </div>
     );
   });
