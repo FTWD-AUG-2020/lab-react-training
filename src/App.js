@@ -35,6 +35,7 @@ function IdCard(props) {
       <p>Height: {props.height}</p>
      
     </div>
+    
   )
 }
 
