@@ -90,15 +90,16 @@ function App() {
       />
 
       <Dice />
-        <br></br>
+      <br></br>
       <Carousel
-  imgs={[
-    'https://randomuser.me/api/portraits/women/1.jpg',
-    'https://randomuser.me/api/portraits/men/1.jpg',
-    'https://randomuser.me/api/portraits/women/2.jpg',
-    'https://randomuser.me/api/portraits/men/2.jpg'
-  ]}
-/>
+        imgs={[
+          'https://randomuser.me/api/portraits/women/1.jpg',
+          'https://randomuser.me/api/portraits/men/1.jpg',
+          'https://randomuser.me/api/portraits/women/2.jpg',
+          'https://randomuser.me/api/portraits/men/2.jpg',
+        ]}
+      />
+      <NumbersTable limit={12} />
     </div>
   );
 }
@@ -230,49 +231,49 @@ function LikeButton() {
 }
 
 function Dice() {
-
   const rand = () => {
-    return Math.floor((Math.random() * 6) + 1);
-  }
+    return Math.floor(Math.random() * 6 + 1);
+  };
 
   let diceObj = {
-    'empty': 'img/dice-empty.png',
-    '1': 'img/dice1.png',
-    '2': 'img/dice2.png',
-    '3': 'img/dice3.png',
-    '4': 'img/dice4.png',
-    '5': 'img/dice5.png',
-    '6': 'img/dice6.png',
+    empty: 'img/dice-empty.png',
+    1: 'img/dice1.png',
+    2: 'img/dice2.png',
+    3: 'img/dice3.png',
+    4: 'img/dice4.png',
+    5: 'img/dice5.png',
+    6: 'img/dice6.png',
   };
 
   const [img, setImg] = useState(diceObj[rand()]);
 
-  return(
+  return (
     <img
-    src={img}
-    onClick={() => {
-      setImg(diceObj['empty'])
-      setTimeout(() => {
-        setImg(diceObj[rand()])
-      }, 1000)
-    }}
-    alt="dice"></img>
+      src={img}
+      onClick={() => {
+        setImg(diceObj['empty']);
+        setTimeout(() => {
+          setImg(diceObj[rand()]);
+        }, 1000);
+      }}
+      alt="dice"
+    ></img>
   );
 }
 
 function Carousel(props) {
-  const [img, setImg] = useState(0)
+  const [img, setImg] = useState(0);
 
   function left() {
-    if (props.imgs[img-1] === undefined) {
-      setImg(props.imgs.length-1);
+    if (props.imgs[img - 1] === undefined) {
+      setImg(props.imgs.length - 1);
     } else {
       setImg(img - 1);
     }
   }
 
   function right() {
-    if (props.imgs[img+1] === undefined) {
+    if (props.imgs[img + 1] === undefined) {
       setImg(0);
     } else {
       setImg(img + 1);
@@ -280,12 +281,35 @@ function Carousel(props) {
   }
   return (
     <div>
-    <button onClick={left}>Left</button> 
-    <img src={props.imgs[img]} alt="people" /> 
-    <button onClick={right}>Right</button>
+      <button onClick={left}>Left</button>
+      <img src={props.imgs[img]} alt="people" />
+      <button onClick={right}>Right</button>
     </div>
-    
-  )
+  );
+}
+function NumbersTable(props) {
+  let result = [];
+  for (let i = 1; i <= props.limit; i++) {
+    let color = '';
+    if (i % 2 == 0) {
+      color = 'red';
+    } else {
+      color = 'white';
+    }
+    result.push(
+      <div
+        style={{
+          backgroundColor: color,
+          display: 'inline-block',
+          height: '50px',
+          width: '50px',
+        }}
+      >
+        {i}
+      </div>
+    );
+  }
+  return <div>{result}</div>;
 }
 
 export default App;
