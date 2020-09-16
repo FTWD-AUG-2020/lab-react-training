@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
+
 function App() {
   return (
     <div>
@@ -36,7 +37,8 @@ function App() {
         bank="BNP"
         owner="Maxence Bouret"
         bgColor="#11aa99"
-        color="white" />
+        color="white"
+      />
       <CreditCard
         type="Master Card"
         number="0123456789010995"
@@ -45,7 +47,8 @@ function App() {
         bank="N26"
         owner="Maxence Bouret"
         bgColor="#eeeeee"
-        color="#222222" />
+        color="#222222"
+      />
       <CreditCard
         type="Visa"
         number="0123456789016984"
@@ -54,13 +57,39 @@ function App() {
         bank="Name of the Bank"
         owner="Firstname Lastname"
         bgColor="#ddbb55"
-        color="white" />
+        color="white"
+      />
       <Rating>0</Rating>
       <Rating>1.49</Rating>
       <Rating>1.5</Rating>
       <Rating>3</Rating>
       <Rating>4</Rating>
       <Rating>5</Rating>
+      <break></break>
+      <DriverCard
+        name="Travis Kalanick"
+        rating={4.2}
+        img="https://si.wsj.net/public/resources/images/BN-TY647_37gql_OR_20170621052140.jpg?width=620&height=428"
+        car={{
+          model: 'Toyota Corolla Altis',
+          licensePlate: 'CO42DE',
+        }}
+      />
+      <DriverCard
+        name="Dara Khosrowshahi"
+        rating={4.9}
+        img="https://ubernewsroomapi.10upcdn.com/wp-content/uploads/2017/09/Dara_ELT_Newsroom_1000px.jpg"
+      />
+      <break></break>
+      <LikeButton></LikeButton>
+      <LikeButton></LikeButton>
+      <break></break>
+      <ClickablePicture
+        img="/img/persons/maxence.png"
+        imgClicked="/img/persons/maxence-glasses.png"
+      />
+
+      <Dice />
     </div>
   );
 }
@@ -111,7 +140,8 @@ function BoxColor({ r, g, b }) {
           bank="BNP"
           owner="Maxence Bouret"
           bgColor="#11aa99"
-          color="white" />
+          color="white"
+        />
       </h3>
     </div>
   );
@@ -122,32 +152,106 @@ function CreditCard(props) {
     <div className="CC">
       <p>Type: {props.type}</p>
       <p>Number: {props.number}</p>
-      <p>Expires on: {props.expMonth}, {props.expYear}</p>
+      <p>
+        Expires on: {props.expMonth}, {props.expYear}
+      </p>
       <p>Bank: {props.bank}</p>
       <p>Owner: {props.owner}</p>
       <p>BGColour: {props.bgColor}</p>
       <p>Colour: {props.color}</p>
     </div>
-  )
+  );
 }
 
 function Rating(props) {
-  let result = ''
+  let result = '';
   for (let i = 0; i < 5; i++) {
     if (i < Math.round(Number(props.children))) {
-      result += "★"
+      result += '★';
     } else {
-      result += "☆"
+      result += '☆';
     }
+  }
+  return <p>{result}</p>;
+}
 
+function DriverCard(props) {
+  return (
+    <div>
+      <p>{props.name}</p>
+      <img src={props.img}></img>
+      <p>
+        <Rating>{props.rating}</Rating>
+      </p>
+      <p>
+        {props.car?.model}-{props.car?.licensePlate}
+      </p>
+    </div>
+  );
+}
+
+function ClickablePicture(props) {
+  const [pic, setPic] = useState(true);
+
+  return (
+    <div>
+      <img
+        src={pic ? props.img : props.imgClicked}
+        onClick={() => setPic(!pic)}
+      ></img>
+    </div>
+  );
+}
+
+function LikeButton() {
+  let [count, setCount] = useState(0);
+  let color = ['purple', 'blue', 'green', 'yellow', 'orange', 'red'];
+  let random = Math.floor(Math.random() * color.length);
+
+  function counter() {
+    setCount(count + 1);
   }
   return (
-    <p>{result}</p>
-  )
+    <>
+      <button style={{ backgroundColor: `${color[random]}` }} onClick={counter}>
+        {count} likes
+      </button>
+    </>
+  );
+}
+
+function Dice() {
+
+  const rand = () => {
+    return Math.floor((Math.random() * 6) + 1);
+  }
+
+  let diceObj = {
+    'empty': 'img/dice-empty.png',
+    '1': 'img/dice1.png',
+    '2': 'img/dice2.png',
+    '3': 'img/dice3.png',
+    '4': 'img/dice4.png',
+    '5': 'img/dice5.png',
+    '6': 'img/dice6.png',
+  };
+
+  const [img, setImg] = useState(diceObj[rand()]);
+
+  return(
+    <img
+    src={img}
+    onClick={() => {
+      setImg(diceObj['empty'])
+      setTimeout(() => {
+        setImg(diceObj[rand()])
+      }, 1000)
+    }}
+    alt="dice"></img>
+  );
 }
 
 export default App;
-
 
 // ★
 // ☆
